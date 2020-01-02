@@ -8,11 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		61015CF623BE27BA00DFF318 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61015CF523BE27BA00DFF318 /* AppDelegate.swift */; };
-		61015CF823BE27BA00DFF318 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61015CF723BE27BA00DFF318 /* SceneDelegate.swift */; };
 		61015CFA23BE27BA00DFF318 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61015CF923BE27BA00DFF318 /* ViewController.swift */; };
-		61015CFD23BE27BA00DFF318 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61015CFB23BE27BA00DFF318 /* Main.storyboard */; };
 		61015CFF23BE27BD00DFF318 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61015CFE23BE27BD00DFF318 /* Assets.xcassets */; };
-		61015D0223BE27BD00DFF318 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61015D0023BE27BD00DFF318 /* LaunchScreen.storyboard */; };
 		61015D0D23BE27BD00DFF318 /* DamnGoodQrScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61015D0C23BE27BD00DFF318 /* DamnGoodQrScannerTests.swift */; };
 		61015D1823BE27BD00DFF318 /* DamnGoodQrScannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61015D1723BE27BD00DFF318 /* DamnGoodQrScannerUITests.swift */; };
 /* End PBXBuildFile section */
@@ -37,11 +34,8 @@
 /* Begin PBXFileReference section */
 		61015CF223BE27BA00DFF318 /* DamnGoodQrScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DamnGoodQrScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61015CF523BE27BA00DFF318 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		61015CF723BE27BA00DFF318 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		61015CF923BE27BA00DFF318 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		61015CFC23BE27BA00DFF318 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		61015CFE23BE27BD00DFF318 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		61015D0123BE27BD00DFF318 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		61015D0323BE27BD00DFF318 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61015D0823BE27BD00DFF318 /* DamnGoodQrScannerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DamnGoodQrScannerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		61015D0C23BE27BD00DFF318 /* DamnGoodQrScannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamnGoodQrScannerTests.swift; sourceTree = "<group>"; };
@@ -100,11 +94,8 @@
 			isa = PBXGroup;
 			children = (
 				61015CF523BE27BA00DFF318 /* AppDelegate.swift */,
-				61015CF723BE27BA00DFF318 /* SceneDelegate.swift */,
 				61015CF923BE27BA00DFF318 /* ViewController.swift */,
-				61015CFB23BE27BA00DFF318 /* Main.storyboard */,
 				61015CFE23BE27BD00DFF318 /* Assets.xcassets */,
-				61015D0023BE27BD00DFF318 /* LaunchScreen.storyboard */,
 				61015D0323BE27BD00DFF318 /* Info.plist */,
 			);
 			path = DamnGoodQrScanner;
@@ -232,9 +223,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61015D0223BE27BD00DFF318 /* LaunchScreen.storyboard in Resources */,
 				61015CFF23BE27BD00DFF318 /* Assets.xcassets in Resources */,
-				61015CFD23BE27BA00DFF318 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,7 +250,6 @@
 			files = (
 				61015CFA23BE27BA00DFF318 /* ViewController.swift in Sources */,
 				61015CF623BE27BA00DFF318 /* AppDelegate.swift in Sources */,
-				61015CF823BE27BA00DFF318 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,25 +283,6 @@
 			targetProxy = 61015D1423BE27BD00DFF318 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		61015CFB23BE27BA00DFF318 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				61015CFC23BE27BA00DFF318 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		61015D0023BE27BD00DFF318 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				61015D0123BE27BD00DFF318 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		61015D1A23BE27BD00DFF318 /* Debug */ = {
@@ -437,6 +406,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 395KV63C7H;
 				INFOPLIST_FILE = DamnGoodQrScanner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -444,7 +414,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = mindelicious.DamnGoodQrScanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -455,6 +425,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 395KV63C7H;
 				INFOPLIST_FILE = DamnGoodQrScanner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -462,7 +433,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = mindelicious.DamnGoodQrScanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
