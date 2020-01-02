@@ -1,0 +1,28 @@
+PODS:
+  - SnapKit (5.0.1)
+  - SwiftQRScanner (0.1.4)
+
+DEPENDENCIES:
+  - SnapKit (~> 5.0.0)
+  - SwiftQRScanner (from `https://github.com/vinodiOS/SwiftQRScanner`)
+
+SPEC REPOS:
+  trunk:
+    - SnapKit
+
+EXTERNAL SOURCES:
+  SwiftQRScanner:
+    :git: https://github.com/vinodiOS/SwiftQRScanner
+
+CHECKOUT OPTIONS:
+  SwiftQRScanner:
+    :commit: 9d2318d8fe9263e796b93408f53831f968aad67a
+    :git: https://github.com/vinodiOS/SwiftQRScanner
+
+SPEC CHECKSUMS:
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftQRScanner: 4e5fd0f29c7a8888998de191d10bb4d38a1ee34a
+
+PODFILE CHECKSUM: 663754405786780303f53c5e20ae144eeb138e23
+
+COCOAPODS: 1.8.4

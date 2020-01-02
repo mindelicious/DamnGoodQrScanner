@@ -1,0 +1,6 @@
+framework module Pods_DamnGoodQrScanner_DamnGoodQrScannerUITests {
+  umbrella header "Pods-DamnGoodQrScanner-DamnGoodQrScannerUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
