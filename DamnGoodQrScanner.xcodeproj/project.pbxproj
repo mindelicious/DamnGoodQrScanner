@@ -3,12 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		61015CF623BE27BA00DFF318 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61015CF523BE27BA00DFF318 /* AppDelegate.swift */; };
-		61015CFA23BE27BA00DFF318 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61015CF923BE27BA00DFF318 /* ViewController.swift */; };
+		61015CFA23BE27BA00DFF318 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61015CF923BE27BA00DFF318 /* ScanViewController.swift */; };
 		61015CFF23BE27BD00DFF318 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61015CFE23BE27BD00DFF318 /* Assets.xcassets */; };
 		61015D0D23BE27BD00DFF318 /* DamnGoodQrScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61015D0C23BE27BD00DFF318 /* DamnGoodQrScannerTests.swift */; };
 		61015D1823BE27BD00DFF318 /* DamnGoodQrScannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61015D1723BE27BD00DFF318 /* DamnGoodQrScannerUITests.swift */; };
@@ -38,7 +38,7 @@
 		3D64A02142793C40F4893087 /* Pods-DamnGoodQrScanner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DamnGoodQrScanner.release.xcconfig"; path = "Target Support Files/Pods-DamnGoodQrScanner/Pods-DamnGoodQrScanner.release.xcconfig"; sourceTree = "<group>"; };
 		61015CF223BE27BA00DFF318 /* DamnGoodQrScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DamnGoodQrScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61015CF523BE27BA00DFF318 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		61015CF923BE27BA00DFF318 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		61015CF923BE27BA00DFF318 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		61015CFE23BE27BD00DFF318 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		61015D0323BE27BD00DFF318 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61015D0823BE27BD00DFF318 /* DamnGoodQrScannerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DamnGoodQrScannerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,7 +95,6 @@
 				6CA455E384CD411BB155C4C3 /* Pods-DamnGoodQrScannerTests.debug.xcconfig */,
 				FE0BE04E5E68234604C8F950 /* Pods-DamnGoodQrScannerTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -125,7 +124,9 @@
 			isa = PBXGroup;
 			children = (
 				61015CF523BE27BA00DFF318 /* AppDelegate.swift */,
-				61015CF923BE27BA00DFF318 /* ViewController.swift */,
+				61015D2523BE32BE00DFF318 /* Features */,
+				61015D2723BE32D500DFF318 /* ViewModel */,
+				61015D2823BE32DD00DFF318 /* Service */,
 				61015CFE23BE27BD00DFF318 /* Assets.xcassets */,
 				61015D0323BE27BD00DFF318 /* Info.plist */,
 			);
@@ -148,6 +149,28 @@
 				61015D1923BE27BD00DFF318 /* Info.plist */,
 			);
 			path = DamnGoodQrScannerUITests;
+			sourceTree = "<group>";
+		};
+		61015D2523BE32BE00DFF318 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				61015CF923BE27BA00DFF318 /* ScanViewController.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		61015D2723BE32D500DFF318 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		61015D2823BE32DD00DFF318 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		88E512F900C2861B153C3D44 /* Frameworks */ = {
@@ -397,7 +420,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61015CFA23BE27BA00DFF318 /* ViewController.swift in Sources */,
+				61015CFA23BE27BA00DFF318 /* ScanViewController.swift in Sources */,
 				61015CF623BE27BA00DFF318 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
