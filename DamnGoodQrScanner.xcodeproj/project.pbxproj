@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		61015CF623BE27BA00DFF318 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61015CF523BE27BA00DFF318 /* AppDelegate.swift */; };
 		61015CFA23BE27BA00DFF318 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61015CF923BE27BA00DFF318 /* ScanViewController.swift */; };
-		61015CFF23BE27BD00DFF318 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61015CFE23BE27BD00DFF318 /* Assets.xcassets */; };
 		61015D0D23BE27BD00DFF318 /* DamnGoodQrScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61015D0C23BE27BD00DFF318 /* DamnGoodQrScannerTests.swift */; };
 		61015D1823BE27BD00DFF318 /* DamnGoodQrScannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61015D1723BE27BD00DFF318 /* DamnGoodQrScannerUITests.swift */; };
+		613F961023BF66B200D08376 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 613F960F23BF66B200D08376 /* Assets.xcassets */; };
 		711E3917436628068DC14B2A /* Pods_DamnGoodQrScanner_DamnGoodQrScannerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F597BDB9ABF3A110C1081C1E /* Pods_DamnGoodQrScanner_DamnGoodQrScannerUITests.framework */; };
 		C2961D43055F3EEE7D36782D /* Pods_DamnGoodQrScannerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7629F57B90654DF4F0AB6BA5 /* Pods_DamnGoodQrScannerTests.framework */; };
 		CF9BAC2C8FAF04245765A405 /* Pods_DamnGoodQrScanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66261B8CD08A4BB41E6964F7 /* Pods_DamnGoodQrScanner.framework */; };
@@ -39,7 +39,6 @@
 		61015CF223BE27BA00DFF318 /* DamnGoodQrScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DamnGoodQrScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61015CF523BE27BA00DFF318 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61015CF923BE27BA00DFF318 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
-		61015CFE23BE27BD00DFF318 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		61015D0323BE27BD00DFF318 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61015D0823BE27BD00DFF318 /* DamnGoodQrScannerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DamnGoodQrScannerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		61015D0C23BE27BD00DFF318 /* DamnGoodQrScannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamnGoodQrScannerTests.swift; sourceTree = "<group>"; };
@@ -47,6 +46,7 @@
 		61015D1323BE27BD00DFF318 /* DamnGoodQrScannerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DamnGoodQrScannerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		61015D1723BE27BD00DFF318 /* DamnGoodQrScannerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamnGoodQrScannerUITests.swift; sourceTree = "<group>"; };
 		61015D1923BE27BD00DFF318 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		613F960F23BF66B200D08376 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66261B8CD08A4BB41E6964F7 /* Pods_DamnGoodQrScanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DamnGoodQrScanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		683FF0997AB2A898957CFE9D /* Pods-DamnGoodQrScanner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DamnGoodQrScanner.debug.xcconfig"; path = "Target Support Files/Pods-DamnGoodQrScanner/Pods-DamnGoodQrScanner.debug.xcconfig"; sourceTree = "<group>"; };
 		6CA455E384CD411BB155C4C3 /* Pods-DamnGoodQrScannerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DamnGoodQrScannerTests.debug.xcconfig"; path = "Target Support Files/Pods-DamnGoodQrScannerTests/Pods-DamnGoodQrScannerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -127,7 +127,7 @@
 				61015D2523BE32BE00DFF318 /* Features */,
 				61015D2723BE32D500DFF318 /* ViewModel */,
 				61015D2823BE32DD00DFF318 /* Service */,
-				61015CFE23BE27BD00DFF318 /* Assets.xcassets */,
+				613F960F23BF66B200D08376 /* Assets.xcassets */,
 				61015D0323BE27BD00DFF318 /* Info.plist */,
 			);
 			path = DamnGoodQrScanner;
@@ -292,7 +292,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61015CFF23BE27BD00DFF318 /* Assets.xcassets in Resources */,
+				613F961023BF66B200D08376 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,7 +507,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -561,7 +561,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
