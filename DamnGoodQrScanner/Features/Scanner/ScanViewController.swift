@@ -34,7 +34,6 @@ class ScanViewController: UIViewController {
    @objc func openCamera(sender: UIButton) {
     self.present(scanner, animated: true, completion: nil)
     }
-
 }
 
 extension ScanViewController {
@@ -85,6 +84,8 @@ extension ScanViewController {
 extension ScanViewController: QRScannerCodeDelegate {
     func qrScanner(_ controller: UIViewController, scanDidComplete result: String) {
         print("result:\(result)")
+        let resultViewController = ResultViewController()
+        self.navigationController?.pushViewController(resultViewController, animated: true)
     }
 
     func qrScannerDidFail(_ controller: UIViewController, error: String) {

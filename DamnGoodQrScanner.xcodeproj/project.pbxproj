@@ -12,6 +12,8 @@
 		61015D0D23BE27BD00DFF318 /* DamnGoodQrScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61015D0C23BE27BD00DFF318 /* DamnGoodQrScannerTests.swift */; };
 		61015D1823BE27BD00DFF318 /* DamnGoodQrScannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61015D1723BE27BD00DFF318 /* DamnGoodQrScannerUITests.swift */; };
 		613F961023BF66B200D08376 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 613F960F23BF66B200D08376 /* Assets.xcassets */; };
+		613F961223BF67E200D08376 /* ScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613F961123BF67E200D08376 /* ScanViewModel.swift */; };
+		613F961623BF785700D08376 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613F961523BF785700D08376 /* ResultViewController.swift */; };
 		711E3917436628068DC14B2A /* Pods_DamnGoodQrScanner_DamnGoodQrScannerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F597BDB9ABF3A110C1081C1E /* Pods_DamnGoodQrScanner_DamnGoodQrScannerUITests.framework */; };
 		C2961D43055F3EEE7D36782D /* Pods_DamnGoodQrScannerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7629F57B90654DF4F0AB6BA5 /* Pods_DamnGoodQrScannerTests.framework */; };
 		CF9BAC2C8FAF04245765A405 /* Pods_DamnGoodQrScanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66261B8CD08A4BB41E6964F7 /* Pods_DamnGoodQrScanner.framework */; };
@@ -47,6 +49,8 @@
 		61015D1723BE27BD00DFF318 /* DamnGoodQrScannerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamnGoodQrScannerUITests.swift; sourceTree = "<group>"; };
 		61015D1923BE27BD00DFF318 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		613F960F23BF66B200D08376 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		613F961123BF67E200D08376 /* ScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewModel.swift; sourceTree = "<group>"; };
+		613F961523BF785700D08376 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		66261B8CD08A4BB41E6964F7 /* Pods_DamnGoodQrScanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DamnGoodQrScanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		683FF0997AB2A898957CFE9D /* Pods-DamnGoodQrScanner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DamnGoodQrScanner.debug.xcconfig"; path = "Target Support Files/Pods-DamnGoodQrScanner/Pods-DamnGoodQrScanner.debug.xcconfig"; sourceTree = "<group>"; };
 		6CA455E384CD411BB155C4C3 /* Pods-DamnGoodQrScannerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DamnGoodQrScannerTests.debug.xcconfig"; path = "Target Support Files/Pods-DamnGoodQrScannerTests/Pods-DamnGoodQrScannerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -125,7 +129,6 @@
 			children = (
 				61015CF523BE27BA00DFF318 /* AppDelegate.swift */,
 				61015D2523BE32BE00DFF318 /* Features */,
-				61015D2723BE32D500DFF318 /* ViewModel */,
 				61015D2823BE32DD00DFF318 /* Service */,
 				613F960F23BF66B200D08376 /* Assets.xcassets */,
 				61015D0323BE27BD00DFF318 /* Info.plist */,
@@ -154,16 +157,10 @@
 		61015D2523BE32BE00DFF318 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				61015CF923BE27BA00DFF318 /* ScanViewController.swift */,
+				613F961323BF780000D08376 /* Scanner */,
+				613F961423BF780F00D08376 /* Result */,
 			);
 			path = Features;
-			sourceTree = "<group>";
-		};
-		61015D2723BE32D500DFF318 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		61015D2823BE32DD00DFF318 /* Service */ = {
@@ -171,6 +168,23 @@
 			children = (
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		613F961323BF780000D08376 /* Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				61015CF923BE27BA00DFF318 /* ScanViewController.swift */,
+				613F961123BF67E200D08376 /* ScanViewModel.swift */,
+			);
+			path = Scanner;
+			sourceTree = "<group>";
+		};
+		613F961423BF780F00D08376 /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				613F961523BF785700D08376 /* ResultViewController.swift */,
+			);
+			path = Result;
 			sourceTree = "<group>";
 		};
 		88E512F900C2861B153C3D44 /* Frameworks */ = {
@@ -421,7 +435,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				61015CFA23BE27BA00DFF318 /* ScanViewController.swift in Sources */,
+				613F961223BF67E200D08376 /* ScanViewModel.swift in Sources */,
 				61015CF623BE27BA00DFF318 /* AppDelegate.swift in Sources */,
+				613F961623BF785700D08376 /* ResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
