@@ -8,14 +8,12 @@
 
 import UIKit
 import SnapKit
-import SwiftQRScanner
+
 
 class ScanViewController: UIViewController {
     
     lazy var scanImage = makeImage()
     lazy var scanButton = makeButton()
-    
-    let scanner =  QRCodeScannerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +22,7 @@ class ScanViewController: UIViewController {
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        scanner.delegate = self
+    
     }
     
     required init?(coder: NSCoder) {
@@ -32,7 +30,7 @@ class ScanViewController: UIViewController {
     }
     
    @objc func openCamera(sender: UIButton) {
-    self.present(scanner, animated: true, completion: nil)
+   
     }
 }
 
@@ -78,21 +76,5 @@ extension ScanViewController {
         button.backgroundColor = UIColor(named: "lightBlue")
         button.addTarget(self, action: #selector(openCamera), for: .touchUpInside)
         return button
-    }
-}
-
-extension ScanViewController: QRScannerCodeDelegate {
-    func qrScanner(_ controller: UIViewController, scanDidComplete result: String) {
-        print("result:\(result)")
-        let resultViewController = ResultViewController()
-        self.navigationController?.pushViewController(resultViewController, animated: true)
-    }
-
-    func qrScannerDidFail(_ controller: UIViewController, error: String) {
-        print("error:\(error)")
-    }
-
-    func qrScannerDidCancel(_ controller: UIViewController) {
-        print("SwiftQRScanner did cancel")
     }
 }

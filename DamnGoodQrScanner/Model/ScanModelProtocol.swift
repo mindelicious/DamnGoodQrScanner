@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+protocol ScanModelProtocol {
+    var text: String { get set }
+}
