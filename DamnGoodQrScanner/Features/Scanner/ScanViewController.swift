@@ -6,75 +6,143 @@
 //  Copyright © 2020 Mateusz Danieluk. All rights reserved.
 //
 
+import AVFoundation
 import UIKit
 import SnapKit
 
+class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+    var captureSession: AVCaptureSession!
+    var previewLayer: AVCaptureVideoPreviewLayer!
+    
+    lazy var captureLabel = makeCaptureLabel()
+    lazy var captureButton = makeCaptureButton()
 
-class ScanViewController: UIViewController {
-    
-    lazy var scanImage = makeImage()
-    lazy var scanButton = makeButton()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
     
-    init() {
-        super.init(nibName: nil, bundle: nil)
+    @objc func capturePhoto(sender: UIButton) {
+        
+        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
+        let videoInput: AVCaptureDeviceInput
+
+        do {
+            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+        } catch {
+            return
+        }
     
+        if (captureSession.canAddInput(videoInput)) {
+            captureSession.addInput(videoInput)
+        } else {
+            failed()
+            return
+        }
+
+        let metadataOutput = AVCaptureMetadataOutput()
+
+        if (captureSession.canAddOutput(metadataOutput)) {
+            captureSession.addOutput(metadataOutput)
+
+            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+            metadataOutput.metadataObjectTypes = [.qr]
+        } else {
+            failed()
+            return
+        }
+
+        captureSession.startRunning()
+    }
+
+    func failed() {
+        let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
+        captureSession = nil
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if (captureSession?.isRunning == false) {
+            captureSession.startRunning()
+        }
     }
-    
-   @objc func openCamera(sender: UIButton) {
-   
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if (captureSession?.isRunning == true) {
+            captureSession.stopRunning()
+        }
+    }
+
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        captureSession.stopRunning()
+
+        if let metadataObject = metadataObjects.first {
+            guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
+            guard let stringValue = readableObject.stringValue else { return }
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+            found(code: stringValue)
+        }
+
+        dismiss(animated: true)
+    }
+
+       func found(code: String) {
+        captureLabel.text = code
+       }
+     
+
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
     }
 }
 
 extension ScanViewController {
     
     func setupUI() {
-        view.backgroundColor = .white
-        [scanImage, scanButton].forEach { view.addSubview($0)}
+        view.backgroundColor = UIColor.white
+        captureSession = AVCaptureSession()
+        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        previewLayer.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height / 1.4)
+        previewLayer.videoGravity = .resizeAspectFill
+        view.layer.addSublayer(previewLayer)
+        [captureLabel, captureButton].forEach { view.addSubview($0) }
         
-        scanImage.snp.makeConstraints { make in
-            make.centerY.equalToSuperview().offset(-40)
+        captureButton.snp.makeConstraints { make in
+            make.width.equalTo(50)
+            make.height.equalTo(50)
+            make.bottom.equalToSuperview().offset(-50)
             make.centerX.equalToSuperview()
-            make.width.equalTo(100)
-            make.height.equalTo(100)
         }
-        
-        scanButton.snp.makeConstraints { make in
-            make.top.equalTo(scanImage.snp.bottom).offset(40)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(70)
-            make.height.equalTo(38)
+        captureLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(8)
+            make.right.equalToSuperview().offset(-8)
+            make.bottom.equalTo(captureButton.snp.top).offset(-20)
         }
     }
     
-    func makeImage() -> UIImageView {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "qrIcon")
-        return imageView
+    func makeCaptureLabel() -> UILabel {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 20.0)
+        label.numberOfLines = 0
+        label.textColor = .black
+        label.textAlignment = .center
+        return label
     }
     
-    func makeButton() -> UIButton {
-        let button = UIButton()
-        button.setTitle("SCAN", for: .normal)
-        button.setTitleColor(UIColor(named: "pastelPurple"), for: .normal)
-        button.layer.masksToBounds = false
-        button.layer.cornerRadius = 7.0
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 0.7, height: 0.7)
-        button.layer.shadowOpacity = 0.5
-        button.layer.shadowRadius = 1.0
-        button.layer.borderWidth = 3.0
-        button.layer.borderColor = UIColor(named: "pastelPurple")?.cgColor
-        button.backgroundColor = UIColor(named: "lightBlue")
-        button.addTarget(self, action: #selector(openCamera), for: .touchUpInside)
-        return button
+    func makeCaptureButton() -> UIButton {
+       let button = UIButton()
+       button.setImage(UIImage(named: "camera"), for: .normal)
+       button.addTarget(self, action: #selector(capturePhoto), for: .touchUpInside)
+       return button
     }
 }
