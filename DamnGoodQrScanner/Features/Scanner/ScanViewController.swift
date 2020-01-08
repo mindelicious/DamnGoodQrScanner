@@ -11,6 +11,7 @@ import UIKit
 import SnapKit
 
 class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+    
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     
@@ -20,39 +21,12 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        startCapturing()
     }
     
     @objc func capturePhoto(sender: UIButton) {
-        
-        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
-        let videoInput: AVCaptureDeviceInput
-
-        do {
-            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
-        } catch {
-            return
-        }
-    
-        if (captureSession.canAddInput(videoInput)) {
-            captureSession.addInput(videoInput)
-        } else {
-            failed()
-            return
-        }
-
-        let metadataOutput = AVCaptureMetadataOutput()
-
-        if (captureSession.canAddOutput(metadataOutput)) {
-            captureSession.addOutput(metadataOutput)
-
-            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            metadataOutput.metadataObjectTypes = [.qr]
-        } else {
-            failed()
-            return
-        }
-
         captureSession.startRunning()
+        captureLabel.text = ""
     }
 
     func failed() {
@@ -92,17 +66,12 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         dismiss(animated: true)
     }
 
-       func found(code: String) {
-        captureLabel.text = code
-       }
-     
+    func found(code: String) {
+        captureLabel.text = captureSession.isRunning ? "" : code
+    }
 
     override var prefersStatusBarHidden: Bool {
         return true
-    }
-
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
     }
 }
 
@@ -126,8 +95,39 @@ extension ScanViewController {
         captureLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(8)
             make.right.equalToSuperview().offset(-8)
-            make.bottom.equalTo(captureButton.snp.top).offset(-20)
+            make.bottom.equalTo(captureButton.snp.top).offset(-20 )
         }
+    }
+    
+    func startCapturing() {
+        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
+        let videoInput: AVCaptureDeviceInput
+
+        do {
+           videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+        } catch {
+           return
+        }
+
+        if (captureSession.canAddInput(videoInput)) {
+           captureSession.addInput(videoInput)
+        } else {
+           failed()
+           return
+        }
+
+        let metadataOutput = AVCaptureMetadataOutput()
+
+        if (captureSession.canAddOutput(metadataOutput)) {
+           captureSession.addOutput(metadataOutput)
+
+           metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+           metadataOutput.metadataObjectTypes = [.qr]
+        } else {
+           failed()
+           return
+        }
+        captureSession.startRunning()
     }
     
     func makeCaptureLabel() -> UILabel {
