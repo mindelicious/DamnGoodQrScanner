@@ -10,80 +10,62 @@ import AVFoundation
 import UIKit
 import SnapKit
 
-class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+class ScanViewController: UIViewController {
     
-    var captureSession: AVCaptureSession!
-    var previewLayer: AVCaptureVideoPreviewLayer!
+    private let viewModel: ScanViewModel
     
     lazy var captureLabel = makeCaptureLabel()
     lazy var captureButton = makeCaptureButton()
+    lazy var previewLayer = makePreviewLayer()
 
+    init(viewModel: ScanViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        startCapturing()
+        self.viewModel.startCapturing()
     }
     
     @objc func capturePhoto(sender: UIButton) {
-        captureSession.startRunning()
-        captureLabel.text = ""
+        viewModel.startCapturing()
+        viewModel.captureSession.startRunning()
+//        captureLabel.text = ""
+         captureLabel.text = viewModel.captureSession.isRunning ? "" : viewModel.qrValue
     }
 
     func failed() {
         let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
-        captureSession = nil
+//        viewModel.captureSession = nil
     }
     
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        if (captureSession?.isRunning == false) {
-            captureSession.startRunning()
-        }
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        if (captureSession?.isRunning == true) {
-            captureSession.stopRunning()
-        }
-    }
-
-    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        captureSession.stopRunning()
-
-        if let metadataObject = metadataObjects.first {
-            guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
-            guard let stringValue = readableObject.stringValue else { return }
-            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            found(code: stringValue)
-        }
-
-        dismiss(animated: true)
-    }
-
-    func found(code: String) {
-        captureLabel.text = captureSession.isRunning ? "" : code
-    }
-
+   
+//    func found(code: String) {
+//        captureLabel.text = viewModel.captureSession.isRunning ? "" : code
+//    }
+   
     override var prefersStatusBarHidden: Bool {
         return true
     }
 }
-
+extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
+    
+}
 extension ScanViewController {
     
     func setupUI() {
         view.backgroundColor = UIColor.white
-        captureSession = AVCaptureSession()
-        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height / 1.4)
-        previewLayer.videoGravity = .resizeAspectFill
+
         view.layer.addSublayer(previewLayer)
+       
         [captureLabel, captureButton].forEach { view.addSubview($0) }
         
         captureButton.snp.makeConstraints { make in
@@ -99,35 +81,11 @@ extension ScanViewController {
         }
     }
     
-    func startCapturing() {
-        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
-        let videoInput: AVCaptureDeviceInput
-
-        do {
-           videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
-        } catch {
-           return
-        }
-
-        if (captureSession.canAddInput(videoInput)) {
-           captureSession.addInput(videoInput)
-        } else {
-           failed()
-           return
-        }
-
-        let metadataOutput = AVCaptureMetadataOutput()
-
-        if (captureSession.canAddOutput(metadataOutput)) {
-           captureSession.addOutput(metadataOutput)
-
-           metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-           metadataOutput.metadataObjectTypes = [.qr]
-        } else {
-           failed()
-           return
-        }
-        captureSession.startRunning()
+    func makePreviewLayer() -> AVCaptureVideoPreviewLayer {
+        let previewLayer = AVCaptureVideoPreviewLayer(session: viewModel.captureSession)
+        previewLayer.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height / 1.4)
+        previewLayer.videoGravity = .resizeAspectFill
+        return previewLayer
     }
     
     func makeCaptureLabel() -> UILabel {
