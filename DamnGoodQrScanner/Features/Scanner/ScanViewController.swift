@@ -35,17 +35,10 @@ class ScanViewController: UIViewController {
     
     @objc func capturePhoto(sender: UIButton) {
         viewModel.startCapturing()
-        viewModel.captureSession.startRunning()
+//        viewModel.captureSession.startRunning()
 //        captureLabel.text = ""
-         captureLabel.text = viewModel.captureSession.isRunning ? "" : viewModel.qrValue
     }
 
-    func failed() {
-        let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac, animated: true)
-//        viewModel.captureSession = nil
-    }
     
    
 //    func found(code: String) {
@@ -56,12 +49,13 @@ class ScanViewController: UIViewController {
         return true
     }
 }
-extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
-    
-}
+
 extension ScanViewController {
     
     func setupUI() {
+        
+        viewModel.delegate = self
+        
         view.backgroundColor = UIColor.white
 
         view.layer.addSublayer(previewLayer)
@@ -102,5 +96,18 @@ extension ScanViewController {
        button.setImage(UIImage(named: "camera"), for: .normal)
        button.addTarget(self, action: #selector(capturePhoto), for: .touchUpInside)
        return button
+    }
+}
+
+extension ScanViewController: ScanViewModelDelegate {
+    
+    func didFinishCaptureData(_ stringValue: String) {
+        captureLabel.text = stringValue
+    }
+    
+    func failedCaptureData(_ message: String) {
+        let ac = UIAlertController(title: "What the heck?", message: message, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Again", style: .default))
+            present(ac, animated: true)
     }
 }

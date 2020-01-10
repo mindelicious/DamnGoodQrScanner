@@ -9,14 +9,19 @@
 import UIKit
 import AVFoundation
 
+protocol ScanViewModelDelegate {
+    func didFinishCaptureData(_ stringValue: String)
+    func failedCaptureData(_ message: String)
+}
+
 class ScanViewModel {
     
+    var delegate: ScanViewModelDelegate?
     var captureSession = AVCaptureSession()
 //    var previewLayer = AVCaptureVideoPreviewLayer()
-    
-    var qrValue: String?
    
     func startCapturing() {
+        captureSession.startRunning()
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
         let videoInput: AVCaptureDeviceInput
 
@@ -29,8 +34,7 @@ class ScanViewModel {
         if (captureSession.canAddInput(videoInput)) {
             captureSession.addInput(videoInput)
         } else {
-//            failed()
-            print("damn")
+            delegate?.failedCaptureData("Can't scan QR code")
           return
         }
 
@@ -42,17 +46,12 @@ class ScanViewModel {
             metadataOutput.setMetadataObjectsDelegate(self as? AVCaptureMetadataOutputObjectsDelegate, queue: DispatchQueue.main)
             metadataOutput.metadataObjectTypes = [.qr]
         } else {
-//            failed()
-            print("damn")
+            delegate?.failedCaptureData("Can't scan QR code")
 
           return
         }
-        captureSession.startRunning()
+        
     }
-    
-//    func handlingErr(success: @escaping () -> Void, failure: @escaping (String) -> Void {
-//        
-//    }
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         captureSession.stopRunning()
@@ -61,7 +60,7 @@ class ScanViewModel {
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             guard let stringValue = readableObject.stringValue else { return }
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            qrValue = stringValue
+            delegate?.didFinishCaptureData(stringValue)
             
         }
     }
