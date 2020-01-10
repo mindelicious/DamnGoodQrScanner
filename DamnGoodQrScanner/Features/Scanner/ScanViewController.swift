@@ -30,7 +30,6 @@ class ScanViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        self.viewModel.startCapturing()
     }
     
     @objc func capturePhoto(sender: UIButton) {
@@ -45,11 +44,13 @@ class ScanViewController: UIViewController {
 extension ScanViewController {
     
     func setupUI() {
+        
         viewModel.delegate = self
         view.backgroundColor = UIColor.white
-
         view.layer.addSublayer(previewLayer)
        
+        self.viewModel.startCapturing()
+        
         [captureLabel, captureButton].forEach { view.addSubview($0) }
         
         captureButton.snp.makeConstraints { make in
