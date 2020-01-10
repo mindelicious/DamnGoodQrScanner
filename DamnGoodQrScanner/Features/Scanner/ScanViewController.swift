@@ -35,15 +35,7 @@ class ScanViewController: UIViewController {
     
     @objc func capturePhoto(sender: UIButton) {
         viewModel.startCapturing()
-//        viewModel.captureSession.startRunning()
-//        captureLabel.text = ""
     }
-
-    
-   
-//    func found(code: String) {
-//        captureLabel.text = viewModel.captureSession.isRunning ? "" : code
-//    }
    
     override var prefersStatusBarHidden: Bool {
         return true
@@ -53,9 +45,7 @@ class ScanViewController: UIViewController {
 extension ScanViewController {
     
     func setupUI() {
-        
         viewModel.delegate = self
-        
         view.backgroundColor = UIColor.white
 
         view.layer.addSublayer(previewLayer)
@@ -105,9 +95,13 @@ extension ScanViewController: ScanViewModelDelegate {
         captureLabel.text = stringValue
     }
     
-    func failedCaptureData(_ message: String) {
-        let ac = UIAlertController(title: "What the heck?", message: message, preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "Again", style: .default))
-            present(ac, animated: true)
-    }
+     func isScanning(_ boolValue: Bool) {
+        if boolValue == true {
+            captureButton.isHidden = true
+            captureLabel.isHidden = true
+        } else {
+            captureButton.isHidden = false
+            captureLabel.isHidden = false
+        }
+       }
 }

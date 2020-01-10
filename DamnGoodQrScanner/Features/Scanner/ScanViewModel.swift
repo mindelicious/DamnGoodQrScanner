@@ -9,19 +9,19 @@
 import UIKit
 import AVFoundation
 
-protocol ScanViewModelDelegate {
+protocol ScanViewModelDelegate: class {
     func didFinishCaptureData(_ stringValue: String)
-    func failedCaptureData(_ message: String)
+    func isScanning(_ boolValue: Bool)
 }
 
-class ScanViewModel {
+class ScanViewModel: NSObject, AVCaptureMetadataOutputObjectsDelegate {
     
-    var delegate: ScanViewModelDelegate?
+    weak var delegate: ScanViewModelDelegate?
     var captureSession = AVCaptureSession()
-//    var previewLayer = AVCaptureVideoPreviewLayer()
-   
+ 
     func startCapturing() {
         captureSession.startRunning()
+        delegate?.isScanning(true)
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
         let videoInput: AVCaptureDeviceInput
 
@@ -34,7 +34,6 @@ class ScanViewModel {
         if (captureSession.canAddInput(videoInput)) {
             captureSession.addInput(videoInput)
         } else {
-            delegate?.failedCaptureData("Can't scan QR code")
           return
         }
 
@@ -43,11 +42,9 @@ class ScanViewModel {
         if (captureSession.canAddOutput(metadataOutput)) {
             captureSession.addOutput(metadataOutput)
 
-            metadataOutput.setMetadataObjectsDelegate(self as? AVCaptureMetadataOutputObjectsDelegate, queue: DispatchQueue.main)
+            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             metadataOutput.metadataObjectTypes = [.qr]
         } else {
-            delegate?.failedCaptureData("Can't scan QR code")
-
           return
         }
         
@@ -61,9 +58,8 @@ class ScanViewModel {
             guard let stringValue = readableObject.stringValue else { return }
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             delegate?.didFinishCaptureData(stringValue)
-            
+            delegate?.isScanning(false)
         }
     }
-    
 
 }
