@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISceneDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         window!.makeKeyAndVisible()
-        let vc = ScanViewController()
+        let vc = ScanViewController(viewModel: ScanViewModel())
         window!.rootViewController = vc
         
         return true
